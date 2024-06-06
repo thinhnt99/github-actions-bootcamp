@@ -81,9 +81,15 @@ jobs:
 5. Check your workflow logs:
 ![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/14b58bfc-fe3d-4b9e-9b9c-5ac8a1395b2e)
 
- ## Lab 4
+## Lab 4: Docker build & push
 
- There is a `Dockerfile` file in this repository. It will be used to build the Docker image for this app.
+There is a `Dockerfile` file in this repository. It will be used to build the Docker image for this app.
 
- Let's create a new workflow for automate-building the Docker images in GitHub Actions and push them to GitHub Container Registry.
- 
+Let's create a new workflow for automate-building the Docker images in GitHub Actions and push them to GitHub Container Registry.
+
+1. We use an Action [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images) in [GitHub Marketplace](https://github.com/marketplace)
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/eada567a-8f19-4616-9f66-0e3ff0c73bcb)
+2. Scrolling down to the `Git context` section and copy the sample workflow YAML
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/c9dd29af-7d50-4e17-bc28-0e024a4b79fb)
+3. Create new workflow `docker.yaml`
+4. Add your Docker repository secrets
