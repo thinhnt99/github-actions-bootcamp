@@ -1,4 +1,4 @@
-# GitHub Actions Presentation
+# GitHub Actions Bootcamp
 
 This is the sample app for GitHub Actions Presentation.
 
