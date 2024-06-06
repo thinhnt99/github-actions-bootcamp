@@ -38,7 +38,7 @@ jobs:
 5. Finally, make sure that you see the new step completed successfully:
 ![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/90eb9d7e-26bf-431a-8ea2-248f8a9dcf27)
 
-## Lab 2
+## Lab 2: Django CI
 
 Now, let's create a new workflow `django.yaml` and perform Continuous Integration (CI) for the app.
 
@@ -55,7 +55,33 @@ Now, let's create a new workflow `django.yaml` and perform Continuous Integratio
 ```
 7. Commit and make sure that the workflow is running
 
- ## Lab 3
+## Lab 3: Secrets
+
+In this lab, the `hello` job should print `Hello, $NAME!` instead of `Hello, World!`.
+
+The `$NAME` is an user-defined repository secret variable that will be injected by GitHub Actions.
+
+1. Open `Settings` page
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/c83389be-c6b4-47ea-a33e-687be05fcfa9)
+2. Open `Secrets and variables` > `Actions`
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/76cd7f74-1c7b-4dcc-a6b4-cbf24aef8f9a)
+3. Add your repository secrets
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/a86a55b8-5351-4b04-b2a8-68d738d6cf96)
+4. Change the step:
+```yaml
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          NAME: ${{ secrets.NAME }}
+        run: echo "Hello, $NAME!"
+```
+5. Check your workflow logs:
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/14b58bfc-fe3d-4b9e-9b9c-5ac8a1395b2e)
+
+ ## Lab 4
 
  There is a `Dockerfile` file in this repository. It will be used to build the Docker image for this app.
 
