@@ -87,9 +87,44 @@ There is a `Dockerfile` file in this repository. It will be used to build the Do
 
 Let's create a new workflow for automate-building the Docker images in GitHub Actions and push them to GitHub Container Registry.
 
+Requirements:
+- The workflow should only trigger when having the `push` and `pull_request` event on the `main` branch only.
+- The workflow shouldn't push the images to the registry server during pull request.
+- The workflow should push the image with tags: `latest` and `build-${{ vars.GITHUB_RUN_NUMBER }}`.
+
 1. We use an Action [Build and push Docker images](https://github.com/marketplace/actions/build-and-push-docker-images) in [GitHub Marketplace](https://github.com/marketplace)
 ![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/eada567a-8f19-4616-9f66-0e3ff0c73bcb)
 2. Scrolling down to the `Git context` section and copy the sample workflow YAML
 ![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/c9dd29af-7d50-4e17-bc28-0e024a4b79fb)
-3. Create new workflow `docker.yaml`
-4. Add your Docker repository secrets
+3. Prepare your Docker repository secret: `REGISTRY_SERVER=ghcr.io`
+4. Create new workflow `docker.yaml` file, paste the sample workflow.
+5. First, let's modify the event triggers. In this case, we want to trigger this workflow when having new PR/push to the `main` branch (only `main` branch).
+```yaml
+on:
+  push:
+    branches:
+      - 'main'
+  pull_request:
+    branches:
+      - 'main'
+```
+6. Next, make the login step use the registry server by reading Secrets:
+```yaml
+      - name: Login to the container registry server
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ secrets.REGISTRY_SERVER }}   # User-defined repository secret variable. Value: ghcr.io
+          username: ${{ github.repository_owner }}   # Pre-defined variable by GitHub Actions
+          password: ${{ secrets.GITHUB_TOKEN }}      # Pre-defined variable by GitHub Actions
+```
+7. Add some args for the `Build and push` step
+```yaml
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          push: ${{ github.event_name == 'push' }}   # Only push Docker images to the registry server on the push event 
+          tags: |-
+            ${{ secrets.REGISTRY_SERVER }}/${{ github.repository }}:latest
+            ${{ secrets.REGISTRY_SERVER }}/${{ github.repository }}:build-${{ vars.GITHUB_RUN_NUMBER }}
+```
+8. Check the workflow logs
