@@ -10,7 +10,7 @@ This is the sample app for GitHub Actions Presentation.
 
 ![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/72750afe-9aca-45b1-8d9b-d7a4b5a8d2fa)
 
-## Lab 1
+## Lab 1: Hello, World!
 
 There is an workflow located at `.github/workflows/hello-world.yaml`.
 
@@ -19,6 +19,24 @@ Let's add a new step into the Job named `hello`. It should execute the following
 ```bash
 cat requirements.txt
 ```
+
+1. In the `main` branch, open `.github/workflows/hello-world.yaml` then click the edit button:
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/8f4a3d45-5965-4fae-aa0f-38df2894b6c4)
+2. Add new step into the job `hello`:
+```yaml
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: echo "Hello, World!"
+      - run: cat requirements.txt
+```
+3. Commit to forked-repository
+4. Next, open `Actions` tab in GitHub. You will see the workflow `hello-world`.
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/0d8edab8-0e0e-4883-83a7-1b12dc1f7ee0)
+5. Finally, make sure that you see the new step completed successfully:
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/90eb9d7e-26bf-431a-8ea2-248f8a9dcf27)
 
 ## Lab 2
 
