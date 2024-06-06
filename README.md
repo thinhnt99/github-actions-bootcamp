@@ -2,7 +2,12 @@
 
 This is the sample app for GitHub Actions Presentation.
 
-**WARNING: Please fork this repository and practice on your fork-repo.**
+## WARNING
+
+- Please fork this repository and practice on it.
+- You must enable GitHub Actions on the forked-repository. If not, the Workflows may not run.
+
+![image](https://github.com/devsuccess101/github-actions-bootcamp/assets/13513658/72750afe-9aca-45b1-8d9b-d7a4b5a8d2fa)
 
 ## Lab 1
 
